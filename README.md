@@ -8,7 +8,7 @@ LIFE MAKE PARTNERS の個別事業診断フォーマット（全12項目＋総�
 | ファイル | 内容 |
 |---|---|
 | `index.html` | 電子書籍。単一ファイル完結。GitHub Pages にそのまま置ける |
-| `LMP_SHINDAN_A4.pdf` | A4縦 11ページ版（印刷して手書き記入できる版面） |
+| `LMP_SHINDAN_A4.pdf` | A4縦 9ページ版（印刷して手書き記入できる版面） |
 | `cover.png` / `back.png` | 表紙・裏表紙（A4版PDFの1ページ目・最終ページから生成） |
 | `logo.png` / `logo-white.png` | LMPロゴ。原色版（透過）と白抜き版 |
 
@@ -27,7 +27,32 @@ node tools/make-logo.js "~/Downloads/LMPロゴ 完成版.png" assets
 - 電子書籍の上部バー … 白抜き版（高さ26px）
 - 巻末 … 原色版
 
-A4版PDFの版面は `~/lmp-journey-pdf/shindan.html`。Chrome の `--print-to-pdf` で刷っている。
+## A4版の組み方
+
+版面は `~/lmp-journey-pdf/shindan.html`。**1ページ＝1枚の `.sheet`** で組んでいる。
+Chrome の印刷はページ余白ボックス（`@bottom-center` など）に対応しておらず、
+流し込みのままではノンブルを入れられないため、ページの実体を自分で持たせている。
+
+- `@page{margin:0}`、`.sheet` が 210×297mm と余白を持ち、右下にノンブル `.nb`
+- 表紙・裏表紙（`.full`）はノンブル無し。番号は本文だけに振る（02〜08 / 09）
+
+セクションの割り付けは `tools/paginate.js` の `GROUPS` が正本。
+
+```bash
+node tools/paginate.js          # GROUPS どおりに組み直す
+node tools/paginate.js --dry    # 割り付けだけ確認
+node tools/paginate.js --solo   # 1セクション1ページ（各セクションの実寸を測るとき）
+node tools/measure.js           # 各ページの余りをmmで出す。負ならはみ出し
+```
+
+`measure.js` は `shindan.html` 末尾の計測スクリプト（印刷には出ない）が書いた値を
+`--dump-dom` で読む。**中身を足したら必ず measure を通す**。`.sheet` は
+`overflow:hidden` なので、はみ出しても見た目では気づかず黙って切れる。
+
+本文を10.5pt化した直後は11ページだったが、行間と余白を詰め、収益シミュレーションを
+2段組にして9ページに収めた。空いたページは記入欄の高さで埋めている。
+
+刷るのは Chrome の `--print-to-pdf`。
 
 ```bash
 "C:/Program Files/Google/Chrome/Application/chrome.exe" --headless=new --disable-gpu \
@@ -43,7 +68,7 @@ pdftoppm -f "$LAST" -l "$LAST" -r 120 -png -singlefile LMP_SHINDAN_A4.pdf back
 ```
 
 裏表紙は最終ページなので、ページ番号を直接書かず `pdfinfo` から取る。
-本文の文字サイズを変えるとページ数が動く（10.5pt化で10→11ページになった）。
+本文の文字サイズや割り付けを変えるとページ数が動くので、番号は直接書かない。
 
 ## 構成
 
