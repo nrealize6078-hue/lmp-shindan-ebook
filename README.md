@@ -10,6 +10,22 @@ LIFE MAKE PARTNERS の個別事業診断フォーマット（全12項目＋総�
 | `index.html` | 電子書籍。単一ファイル完結。GitHub Pages にそのまま置ける |
 | `LMP_SHINDAN_A4.pdf` | A4縦 10ページ版（印刷して手書き記入できる版面） |
 | `cover.png` / `back.png` | 表紙・裏表紙（A4版PDFの1ページ目・10ページ目から生成） |
+| `logo.png` / `logo-white.png` | LMPロゴ。原色版（透過）と白抜き版 |
+
+## ロゴ
+
+配布された `LMPロゴ 完成版.png` は白背景で余白も大きいため、そのままでは青い面に置けない。
+`~/lmp-journey-pdf/tools/make-logo.js` で、余白を切って白を透過させた原色版と、
+同じ形の白抜き版を作っている（依存パッケージ無し。Node の zlib だけでPNGを読み書きする）。
+
+```bash
+node tools/make-logo.js "~/Downloads/LMPロゴ 完成版.png" assets
+```
+
+- 表紙・裏表紙 … 白抜き版。書名の上に置き、以前の「LIFE MAKE PARTNERS」の文字は
+  ロゴ内のワードマークと重複するため外した
+- 電子書籍の上部バー … 白抜き版（高さ26px）
+- 巻末 … 原色版
 
 A4版PDFの版面は `~/lmp-journey-pdf/shindan.html`。Chrome の `--print-to-pdf` で刷っている。
 

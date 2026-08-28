@@ -28,7 +28,8 @@ body{margin:0;padding-top:var(--bar);background:#e8eef3;color:var(--ink);line-he
   padding:var(--safeT) max(14px,3vw) 0;background:var(--blue);color:#fff;
   display:flex;align-items:center;gap:12px;box-shadow:0 2px 14px #0a7ac940}
 .topbar .home{color:#fff;font-weight:700;font-size:.7rem;letter-spacing:.14em;
-  text-decoration:none;white-space:nowrap;flex:none}
+  text-decoration:none;white-space:nowrap;flex:none;display:flex;align-items:center;gap:9px}
+.topbar .hlogo{height:26px;width:auto;display:block}
 .topbar .now{flex:1;min-width:0;color:#d3ecfb;font-size:.76rem;line-height:1.35;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right}
 .topbar .now b{color:var(--blue-l);font-weight:700;margin-right:.5em}
@@ -224,6 +225,7 @@ textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
 .saveflag.on{opacity:1}
 
 .endmark{text-align:center;padding:60px 0 6px}
+.endmark .endlogo{display:block;width:min(210px,60%);height:auto;margin:0 auto 18px}
 .endmark .m{color:var(--blue-d);font-size:1.3rem;font-weight:700;letter-spacing:.1em;margin:0}
 .endmark .c{color:var(--blue-2);font-size:1.02rem;font-weight:700;margin:.5em 0 0}
 .endmark .s{color:var(--muted);font-size:.8rem;margin:.7em 0 0}
@@ -309,7 +311,7 @@ textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
 <body id="top">
 
 <header class="topbar">
-  <a class="home" href="#top">LMP経営診断書</a>
+  <a class="home" href="#top"><img class="hlogo" src="logo-white.png" alt="">LMP経営診断書</a>
   <p class="now"><b id="now-no"></b><span id="now-ttl">この診断書について</span></p>
   <button class="tocbtn" id="tocbtn" type="button" aria-controls="tocpanel" aria-expanded="false">
     <span class="bars" aria-hidden="true">&#9776;</span>目次</button>
@@ -734,7 +736,7 @@ textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
   </div>
 
   <div class="endmark">
-    <p class="m">LIFE MAKE PARTNERS</p>
+    <img class="endlogo" src="logo.png" alt="LIFE MAKE PARTNERS">
     <p class="c">地域で一番、必要とされる会社をつくる。</p>
     <p class="s">すべては、100年後の子どもたちのために。</p>
     <img class="backart" src="back.png" alt="裏表紙" loading="lazy">
