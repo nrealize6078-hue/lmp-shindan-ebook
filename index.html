@@ -113,39 +113,61 @@ p{margin:0}
 /* ---- 記入欄 ---- */
 .form{border:1px solid var(--line);background:var(--mist);padding:18px 20px;margin:1.2em 0}
 .form .cap{color:var(--blue-d);font-size:.66rem;font-weight:700;letter-spacing:.22em;margin:0 0 10px}
-.row{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-bottom:1px dotted #c5d6e2}
+.row{display:flex;gap:12px;align-items:center;padding:7px 0;border-bottom:1px dotted #c5d6e2}
 .row:last-child{border-bottom:0}
 .row .lb{flex:none;min-width:9em;color:var(--muted);font-size:.82rem;letter-spacing:.05em}
-.row .in{flex:1;border-bottom:1px solid #b7cbd9;height:1.5em}
 .row .u{flex:none;color:var(--muted);font-size:.8rem}
-.wbox{border:1px solid #cddeea;background:
-  repeating-linear-gradient(#fff,#fff 2.05em,#e6eff6 2.05em,#e6eff6 calc(2.05em + 1px));
-  height:6.2em;margin:.6em 0}
-.wbox.s{height:4.15em}
+input.in{flex:1;min-width:0;width:100%;font:inherit;font-size:.92rem;line-height:1.7;
+  color:var(--ink);background:#fff;border:1px solid #cddeea;border-radius:2px;
+  padding:5px 9px;transition:border-color .15s,box-shadow .15s}
+input.in::placeholder{color:#a8bbc9}
+input.in:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px #0a7ac91f}
+input.in.filled{border-color:#9dc6e3;background:#fbfdff}
+textarea.wbox{display:block;width:100%;font:inherit;font-size:.92rem;line-height:1.9;
+  color:var(--ink);background:#fff;border:1px solid #cddeea;border-radius:2px;
+  padding:9px 12px;margin:.6em 0;resize:vertical;min-height:5.4em;overflow:hidden;
+  transition:border-color .15s,box-shadow .15s}
+textarea.wbox.s{min-height:3.6em}
+textarea.wbox::placeholder{color:#a8bbc9}
+textarea.wbox:focus{outline:0;border-color:var(--blue);box-shadow:0 0 0 3px #0a7ac91f}
+textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
 
-/* ---- 選択肢 ---- */
+/* ---- 選択（単一・複数） ---- */
+.pickset{display:flex;flex-wrap:wrap;gap:8px;margin:.8em 0}
+.pickset button{font:inherit;cursor:pointer;background:#fff;color:var(--blue-2);
+  border:1px solid #bcd6e6;padding:.42em 1.1em;font-size:.85rem;line-height:1.6;
+  -webkit-tap-highlight-color:transparent;transition:.13s}
+.pickset button:hover{border-color:var(--blue)}
+.pickset button[aria-pressed="true"]{background:var(--blue-2);border-color:var(--blue-2);
+  color:#fff;font-weight:700}
+.pickset.grade button{min-width:3.4em;text-align:center;font-weight:700;letter-spacing:.08em}
+.pickset.check button{color:var(--ink);font-weight:400}
+.pickset.check button::before{content:"□";color:var(--blue);margin-right:.5em;font-weight:700}
+.pickset.check button[aria-pressed="true"]{color:#fff;font-weight:700}
+.pickset.check button[aria-pressed="true"]::before{content:"☑";color:#fff}
+
 .opts{margin:1em 0;display:grid;gap:8px}
-.opt{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;
-  border:1px solid var(--line);padding:11px 13px;background:#fff}
+.opt{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;text-align:left;
+  border:1px solid var(--line);padding:11px 13px;background:#fff;font:inherit;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:.13s}
+.opt:hover{border-color:#9dc6e3}
 .opt .k{width:26px;height:26px;line-height:26px;text-align:center;background:var(--blue-2);
   color:#fff;font-size:.75rem;font-weight:700}
-.opt .l{font-size:.92rem;line-height:1.7}
+.opt .l{font-size:.92rem;line-height:1.7;color:var(--ink)}
 .opt .l small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
-.sel{display:flex;flex-wrap:wrap;gap:8px;margin:.8em 0}
-.sel span{border:1px solid #bcd6e6;color:var(--blue-2);background:#fff;
-  padding:.4em 1.1em;font-size:.85rem;font-weight:700;letter-spacing:.08em}
-.checks{display:flex;flex-wrap:wrap;gap:8px;margin:.8em 0}
-.checks span{border:1px solid var(--line);background:#fff;color:var(--ink);
-  padding:.42em .9em;font-size:.84rem}
-.checks span::before{content:"□";color:var(--blue);margin-right:.5em;font-weight:700}
+.opt[aria-pressed="true"]{border-color:var(--blue);background:var(--soft);
+  box-shadow:inset 4px 0 0 var(--blue)}
+.opt[aria-pressed="true"] .l{font-weight:700;color:var(--blue-2)}
 
 /* ---- 表 ---- */
 .tbl{width:100%;border-collapse:collapse;margin:1em 0;font-size:.88rem}
-.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:11px 8px;text-align:left;
+.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:9px 8px;text-align:left;
   line-height:1.6;vertical-align:middle}
 .tbl th{color:var(--blue-d);font-size:.68rem;letter-spacing:.14em;font-weight:700;
   border-bottom:2px solid var(--blue-2)}
-.tbl td.o{text-align:right;color:var(--muted);white-space:nowrap;letter-spacing:.1em}
+.tbl td.o{text-align:right;white-space:nowrap}
+.tbl td.o .pickset{justify-content:flex-end;margin:0;gap:5px}
+.tbl td.o .pickset button{padding:.3em .8em;font-size:.78rem}
 .tbl td.k{color:var(--blue-2);font-weight:700;width:9em}
 
 /* ---- 流れ ---- */
@@ -178,6 +200,24 @@ p{margin:0}
 .note{border-left:4px solid var(--sky);background:var(--soft);padding:14px 18px;margin:1.2em 0;
   font-size:.92rem;line-height:1.9}
 .note b{color:var(--blue-2)}
+
+/* ---- 入力データの操作 ---- */
+.datapanel{border:1px solid var(--line);background:var(--mist);padding:18px 20px;margin:34px 0 0}
+.datapanel .cap{color:var(--blue-d);font-size:.66rem;font-weight:700;letter-spacing:.22em;margin:0 0 8px}
+.datapanel p{font-size:.82rem;color:var(--muted);line-height:1.8;margin:0 0 12px}
+.datapanel .btns{display:flex;flex-wrap:wrap;gap:8px}
+.datapanel button{font:inherit;font-size:.8rem;font-weight:700;cursor:pointer;
+  border:1px solid var(--blue-2);background:#fff;color:var(--blue-2);padding:.62em 1.3em;
+  -webkit-tap-highlight-color:transparent}
+.datapanel button:hover{background:var(--blue-2);color:#fff}
+.datapanel button.warn{border-color:#b4443a;color:#b4443a}
+.datapanel button.warn:hover{background:#b4443a;color:#fff}
+
+.saveflag{position:fixed;z-index:55;left:16px;bottom:calc(16px + var(--safeB));
+  background:var(--blue-2);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.1em;
+  padding:.66em 1.2em;box-shadow:0 4px 16px #0a7ac93d;opacity:0;pointer-events:none;
+  transition:opacity .25s}
+.saveflag.on{opacity:1}
 
 .endmark{text-align:center;padding:60px 0 6px}
 .endmark .m{color:var(--blue-d);font-size:1.3rem;font-weight:700;letter-spacing:.1em;margin:0}
@@ -225,6 +265,9 @@ p{margin:0}
   h1{font-size:1.35rem;margin-bottom:20px}
   .cols,.engs{grid-template-columns:1fr}
   .hit{padding:1em 1.05em;font-size:.99rem;text-align:left}
+  .row{flex-wrap:wrap;gap:6px}
+  .row .lb{min-width:100%}
+  .tbl td.o .pickset{justify-content:flex-start}
 }
 @media(max-width:360px){
   main{padding:0 14px 76px}
@@ -238,7 +281,7 @@ p{margin:0}
 @media print{
   @page{size:A4;margin:18mm}
   body{background:#fff;padding-top:0;font-size:10pt}
-  .topbar,.topbtn,#tocpanel,.dl,.cover .scroll,nav.side{display:none!important}
+  .topbar,.topbtn,#tocpanel,.dl,.cover .scroll,nav.side,.datapanel,.saveflag{display:none!important}
   .cover{min-height:0;break-after:page;padding:0;background:#fff;display:block}
   .coverart{max-width:100%;max-height:none;width:100%;box-shadow:none}
   .layout{display:block;max-width:none;padding:0}
@@ -247,7 +290,14 @@ p{margin:0}
   .part{break-before:page}
   h1,.hit,.partbox,.glabel,.form,.tl .ph,.flowbox{break-inside:avoid}
   h1{break-after:avoid}
-  .cover,.hit,.partbox,.glabel,.flowbox,.opt .k,.eng .i{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  input.in,textarea.wbox{border:0;border-bottom:1px solid #9aa7b2;border-radius:0;
+    background:transparent;box-shadow:none;padding:1px 2px}
+  textarea.wbox{border:1px solid #c3ccd4}
+  .pickset button{border-color:#9aa7b2;color:#5b6a78}
+  .pickset button[aria-pressed="true"]{background:#065f9f;border-color:#065f9f;color:#fff}
+  .opt[aria-pressed="true"]{background:#eaf6fe}
+  .cover,.hit,.partbox,.glabel,.flowbox,.opt .k,.eng .i,
+  .pickset button[aria-pressed="true"]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
 </head>
@@ -263,7 +313,7 @@ p{margin:0}
 </header>
 
 <section class="cover" id="cover" aria-label="表紙">
-  <img class="coverart" src="cover.png" width="1487" height="2104" fetchpriority="high"
+  <img class="coverart" src="cover.png" width="1488" height="2105" fetchpriority="high"
        alt="LMP経営診断書 ― 御社なら、どう勝つか。 LIFE MAKE PARTNERS">
   <div class="dl">
     <a href="LMP_SHINDAN_A4.pdf" download="LMP経営診断書.pdf">A4版 PDF</a>
@@ -295,15 +345,15 @@ p{margin:0}
   <div class="grp">
     <p class="say">LMP経営診断書は、加盟を決めるための書類ではありません。Lステップでいただいた回答をもとに、御社が<b>何を大切にしていて</b>、<b>どこに課題を感じ</b>、<b>どんな会社を目指しているのか</b>を一度整理し、その上で「御社の場合、LMPをどう使えば一番強くなるのか」を一緒に考えるためのものです。</p>
     <div class="hit"><span>相手を理解してから、提案する。</span><span class="a">それがLMPの考え方そのものです。</span></div>
-    <p class="say">記入欄は、個別事業診断の場で一緒に埋めていきます。A4版PDFを印刷して手書きで使うこともできます。</p>
+    <p class="say">記入欄はこの画面にそのまま入力できます。入力内容はお使いのブラウザに自動保存され、次に開いたときも残ります。印刷して手書きで使う場合はA4版PDFをどうぞ。</p>
   </div>
   <div class="form">
     <p class="cap">BASIC INFORMATION</p>
-    <div class="row"><div class="lb">企業名</div><div class="in"></div></div>
-    <div class="row"><div class="lb">代表者名</div><div class="in"></div></div>
-    <div class="row"><div class="lb">対象エリア</div><div class="in"></div></div>
-    <div class="row"><div class="lb">現在の事業</div><div class="in"></div></div>
-    <div class="row"><div class="lb">診断日</div><div class="in"></div></div>
+    <div class="row"><span class="lb">企業名</span><input class="in" data-k="b.company" placeholder="株式会社〇〇"></div>
+    <div class="row"><span class="lb">代表者名</span><input class="in" data-k="b.ceo"></div>
+    <div class="row"><span class="lb">対象エリア</span><input class="in" data-k="b.area"></div>
+    <div class="row"><span class="lb">現在の事業</span><input class="in" data-k="b.biz"></div>
+    <div class="row"><span class="lb">診断日</span><input class="in" data-k="b.date"></div>
   </div>
 </section>
 
@@ -322,17 +372,20 @@ p{margin:0}
   <div class="grp">
     <p class="glabel">社員への考え</p>
     <div class="form">
-      <div class="row"><div class="lb">診断結果</div><div class="in"></div></div>
+      <div class="row"><span class="lb">診断結果</span><input class="in" data-k="s01.result"></div>
     </div>
   </div>
   <div class="grp">
     <p class="glabel">5年後、地域から言われたい言葉</p>
     <p class="say">Lステップ 第7章での回答を、そのまま記入します。この一文が、これから設計するすべての起点になります。</p>
-    <div class="wbox s"></div>
+    <textarea class="wbox s" data-k="s01.words" placeholder="「　　　　　　　　　　　　　　　　　　　　　」"></textarea>
   </div>
   <div class="grp">
     <p class="glabel">REALIZE CLUB 普及意欲</p>
-    <div class="sel"><span>A</span><span>B</span><span>C</span><span>D</span></div>
+    <div class="pickset grade" data-k="s01.rc">
+      <button type="button" data-v="A">A</button><button type="button" data-v="B">B</button>
+      <button type="button" data-v="C">C</button><button type="button" data-v="D">D</button>
+    </div>
     <div class="note">LMPが探しているのは、加盟金を払ってくれる会社ではありません。<b>一緒に、地域の未来をつくれる会社</b>です。</div>
   </div>
 </section>
@@ -343,24 +396,42 @@ p{margin:0}
   <div class="grp">
     <p class="say">Lステップでの回答から、御社が現在もっとも改善したいテーマを整理しました。</p>
     <p class="glabel">最重要課題</p>
-    <div class="wbox s"></div>
+    <textarea class="wbox s" data-k="s02.top"></textarea>
     <p class="glabel" style="margin-top:22px">その他の関心テーマ</p>
     <div class="form">
-      <div class="row"><div class="lb">・</div><div class="in"></div></div>
-      <div class="row"><div class="lb">・</div><div class="in"></div></div>
-      <div class="row"><div class="lb">・</div><div class="in"></div></div>
+      <div class="row"><span class="lb">・</span><input class="in" data-k="s02.other1"></div>
+      <div class="row"><span class="lb">・</span><input class="in" data-k="s02.other2"></div>
+      <div class="row"><span class="lb">・</span><input class="in" data-k="s02.other3"></div>
     </div>
   </div>
   <div class="grp">
     <p class="glabel">現在の経営構造</p>
     <table class="tbl">
       <tr><th>項目</th><th>見るところ</th><th style="text-align:right">評価</th></tr>
-      <tr><td class="k">集客</td><td>ポータル・広告依存</td><td class="o">高 ／ 中 ／ 低</td></tr>
-      <tr><td class="k">顧客基盤</td><td>既存顧客とのつながり</td><td class="o">強 ／ 中 ／ 未活用</td></tr>
-      <tr><td class="k">顧客LTV</td><td>一顧客あたりの生涯貢献</td><td class="o">高 ／ 中 ／ 改善余地あり</td></tr>
-      <tr><td class="k">ストック収益</td><td>積み上がる収益源</td><td class="o">強 ／ 中 ／ 改善余地あり</td></tr>
-      <tr><td class="k">営業組織</td><td>仕組み化の度合い</td><td class="o">強 ／ 中 ／ 改善余地あり</td></tr>
-      <tr><td class="k">採用・人材</td><td>採用力と定着</td><td class="o">強 ／ 中 ／ 改善余地あり</td></tr>
+      <tr><td class="k">集客</td><td>ポータル・広告依存</td>
+        <td class="o"><div class="pickset" data-k="s02.kpi.shukyaku">
+          <button type="button" data-v="高">高</button><button type="button" data-v="中">中</button><button type="button" data-v="低">低</button>
+        </div></td></tr>
+      <tr><td class="k">顧客基盤</td><td>既存顧客とのつながり</td>
+        <td class="o"><div class="pickset" data-k="s02.kpi.kiban">
+          <button type="button" data-v="強">強</button><button type="button" data-v="中">中</button><button type="button" data-v="未活用">未活用</button>
+        </div></td></tr>
+      <tr><td class="k">顧客LTV</td><td>一顧客あたりの生涯貢献</td>
+        <td class="o"><div class="pickset" data-k="s02.kpi.ltv">
+          <button type="button" data-v="高">高</button><button type="button" data-v="中">中</button><button type="button" data-v="改善余地あり">改善余地あり</button>
+        </div></td></tr>
+      <tr><td class="k">ストック収益</td><td>積み上がる収益源</td>
+        <td class="o"><div class="pickset" data-k="s02.kpi.stock">
+          <button type="button" data-v="強">強</button><button type="button" data-v="中">中</button><button type="button" data-v="改善余地あり">改善余地あり</button>
+        </div></td></tr>
+      <tr><td class="k">営業組織</td><td>仕組み化の度合い</td>
+        <td class="o"><div class="pickset" data-k="s02.kpi.eigyo">
+          <button type="button" data-v="強">強</button><button type="button" data-v="中">中</button><button type="button" data-v="改善余地あり">改善余地あり</button>
+        </div></td></tr>
+      <tr><td class="k">採用・人材</td><td>採用力と定着</td>
+        <td class="o"><div class="pickset" data-k="s02.kpi.jinzai">
+          <button type="button" data-v="強">強</button><button type="button" data-v="中">中</button><button type="button" data-v="改善余地あり">改善余地あり</button>
+        </div></td></tr>
     </table>
   </div>
 </section>
@@ -373,12 +444,20 @@ p{margin:0}
     <div class="hit"><span>「すでに何を持っているか」</span><span class="a">を重要視します。</span></div>
     <p class="say">多くの会社は、顧客がいないのではありません。すでに、たくさんの人とつながっています。</p>
     <p class="glabel">御社が活用できる可能性のある資産</p>
-    <div class="checks">
-      <span>既存顧客</span><span>賃貸来店客</span><span>管理入居者</span><span>オーナー</span>
-      <span>保険契約者</span><span>法人顧客</span><span>地域企業ネットワーク</span><span>営業組織</span>
-      <span>採用力</span><span>地域ブランド</span><span>その他</span>
+    <div class="pickset check multi" data-k="s03.assets">
+      <button type="button" data-v="既存顧客">既存顧客</button>
+      <button type="button" data-v="賃貸来店客">賃貸来店客</button>
+      <button type="button" data-v="管理入居者">管理入居者</button>
+      <button type="button" data-v="オーナー">オーナー</button>
+      <button type="button" data-v="保険契約者">保険契約者</button>
+      <button type="button" data-v="法人顧客">法人顧客</button>
+      <button type="button" data-v="地域企業ネットワーク">地域企業ネットワーク</button>
+      <button type="button" data-v="営業組織">営業組織</button>
+      <button type="button" data-v="採用力">採用力</button>
+      <button type="button" data-v="地域ブランド">地域ブランド</button>
+      <button type="button" data-v="その他">その他</button>
     </div>
-    <div class="wbox s"></div>
+    <textarea class="wbox s" data-k="s03.memo" placeholder="具体的な内容・件数など"></textarea>
   </div>
 </section>
 
@@ -394,11 +473,11 @@ p{margin:0}
 <section id="sec-04">
   <p class="eyebrow">04</p>
   <h1>御社のLMPタイプ</h1>
-  <div class="opts">
-    <div class="opt"><div class="k">A</div><div class="l">顧客資産活用型<small>既存顧客との関係を、一度の取引から生涯支援へ。</small></div></div>
-    <div class="opt"><div class="k">B</div><div class="l">法人ネットワーク型<small>地域企業との接点を活かし、REALIZE CLUBを拡大。</small></div></div>
-    <div class="opt"><div class="k">C</div><div class="l">営業力活用型<small>既存の営業組織を活かし、高付加価値事業へ展開。</small></div></div>
-    <div class="opt"><div class="k">D</div><div class="l">地域新規参入型<small>従来型不動産会社ではなく、最初からLMP型事業として地域へ参入。</small></div></div>
+  <div class="opts pickset" data-k="s04.type">
+    <button type="button" class="opt" data-v="顧客資産活用型"><span class="k">A</span><span class="l">顧客資産活用型<small>既存顧客との関係を、一度の取引から生涯支援へ。</small></span></button>
+    <button type="button" class="opt" data-v="法人ネットワーク型"><span class="k">B</span><span class="l">法人ネットワーク型<small>地域企業との接点を活かし、REALIZE CLUBを拡大。</small></span></button>
+    <button type="button" class="opt" data-v="営業力活用型"><span class="k">C</span><span class="l">営業力活用型<small>既存の営業組織を活かし、高付加価値事業へ展開。</small></span></button>
+    <button type="button" class="opt" data-v="地域新規参入型"><span class="k">D</span><span class="l">地域新規参入型<small>従来型不動産会社ではなく、最初からLMP型事業として地域へ参入。</small></span></button>
   </div>
 </section>
 
@@ -409,9 +488,9 @@ p{margin:0}
     <p class="say">LMPの7つの経営エンジンから、御社との相性が高いものを整理します。</p>
     <div class="form">
       <p class="cap">PRIORITY</p>
-      <div class="row"><div class="lb">優先度 ①</div><div class="in"></div></div>
-      <div class="row"><div class="lb">優先度 ②</div><div class="in"></div></div>
-      <div class="row"><div class="lb">優先度 ③</div><div class="in"></div></div>
+      <div class="row"><span class="lb">優先度 ①</span><input class="in" data-k="s05.p1"></div>
+      <div class="row"><span class="lb">優先度 ②</span><input class="in" data-k="s05.p2"></div>
+      <div class="row"><span class="lb">優先度 ③</span><input class="in" data-k="s05.p3"></div>
     </div>
     <p class="glabel" style="margin-top:22px">7つの経営エンジン</p>
     <div class="engs">
@@ -440,13 +519,19 @@ p{margin:0}
   <h1>御社の収益拡張MAP</h1>
   <div class="grp">
     <p class="glabel">現在</p>
-    <div class="wbox s"></div>
+    <textarea class="wbox s" data-k="s06.now" placeholder="現在の収益源"></textarea>
     <p class="arw" aria-label="次へ">↓</p>
     <p class="glabel">LMP導入後</p>
     <p class="say">既存事業　＋</p>
-    <div class="checks">
-      <span>REALIZE CLUB 初期収益</span><span>REALIZE CLUB ストック収益</span><span>賃貸</span>
-      <span>売買仲介</span><span>注文住宅</span><span>保険</span><span>リフォーム</span><span>その他</span>
+    <div class="pickset check multi" data-k="s06.add">
+      <button type="button" data-v="REALIZE CLUB 初期収益">REALIZE CLUB 初期収益</button>
+      <button type="button" data-v="REALIZE CLUB ストック収益">REALIZE CLUB ストック収益</button>
+      <button type="button" data-v="賃貸">賃貸</button>
+      <button type="button" data-v="売買仲介">売買仲介</button>
+      <button type="button" data-v="注文住宅">注文住宅</button>
+      <button type="button" data-v="保険">保険</button>
+      <button type="button" data-v="リフォーム">リフォーム</button>
+      <button type="button" data-v="その他">その他</button>
     </div>
     <div class="note">一つの商品だけで利益を出す必要がなくなる。それが<b>収益多角化</b>の意味です。</div>
   </div>
@@ -457,7 +542,7 @@ p{margin:0}
   <h1>御社の顧客基盤拡張MAP</h1>
   <div class="grp">
     <p class="glabel">現在の顧客基盤</p>
-    <div class="wbox s"></div>
+    <textarea class="wbox s" data-k="s07.base" placeholder="既存顧客・管理入居者・法人顧客など"></textarea>
     <p class="arw" aria-label="次へ">↓</p>
     <div class="cols">
       <div class="col">
@@ -513,20 +598,25 @@ p{margin:0}
       <ul><li>RC導入企業拡大</li><li>人生教育開始</li><li>人生カルテ蓄積</li><li>人生相談受付</li><li>賃貸／売買／注文住宅／保険／リフォームへの接続</li></ul>
     </div>
   </div>
+  <p class="glabel" style="margin-top:22px">御社の場合のメモ</p>
+  <textarea class="wbox" data-k="s08.memo" placeholder="誰が・いつ・何から始めるか"></textarea>
 </section>
 
 <section id="sec-09">
   <p class="eyebrow">09</p>
   <h1>エリア診断</h1>
   <div class="form">
-    <div class="row"><div class="lb">希望エリア</div><div class="in"></div></div>
-    <div class="row"><div class="lb">人口・商圏</div><div class="in"></div></div>
-    <div class="row"><div class="lb">LMP募集枠</div><div class="in"></div></div>
-    <div class="row"><div class="lb">現在の加盟状況</div><div class="in"></div></div>
+    <div class="row"><span class="lb">希望エリア</span><input class="in" data-k="s09.area"></div>
+    <div class="row"><span class="lb">人口・商圏</span><input class="in" data-k="s09.pop"></div>
+    <div class="row"><span class="lb">LMP募集枠</span><input class="in" data-k="s09.slot"></div>
+    <div class="row"><span class="lb">現在の加盟状況</span><input class="in" data-k="s09.status"></div>
   </div>
   <p class="glabel">エリア判定</p>
-  <div class="checks">
-    <span>参入可能</span><span>条件付き参入可能</span><span>要商圏調整</span><span>募集終了</span>
+  <div class="pickset check" data-k="s09.judge">
+    <button type="button" data-v="参入可能">参入可能</button>
+    <button type="button" data-v="条件付き参入可能">条件付き参入可能</button>
+    <button type="button" data-v="要商圏調整">要商圏調整</button>
+    <button type="button" data-v="募集終了">募集終了</button>
   </div>
   <p class="say" style="margin-top:1em">LMPは、人口・商圏に応じて加盟企業数を限定します。基本的には、</p>
   <div class="hit"><span>1エリア2社程度。</span></div>
@@ -538,25 +628,25 @@ p{margin:0}
   <h1>収益シミュレーション</h1>
   <div class="form">
     <p class="cap">REALIZE CLUB</p>
-    <div class="row"><div class="lb">目標導入企業数</div><div class="in"></div><div class="u">社</div></div>
-    <div class="row"><div class="lb">初期収益</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">月額ストック</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">年間ストック</div><div class="in"></div><div class="u">円</div></div>
+    <div class="row"><span class="lb">目標導入企業数</span><input class="in" data-k="s10.rc.count" inputmode="numeric"><span class="u">社</span></div>
+    <div class="row"><span class="lb">初期収益</span><input class="in" data-k="s10.rc.init" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">月額ストック</span><input class="in" data-k="s10.rc.month" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">年間ストック</span><input class="in" data-k="s10.rc.year" inputmode="numeric"><span class="u">円</span></div>
   </div>
   <div class="form">
     <p class="cap">既存事業 ＋ LMP</p>
-    <div class="row"><div class="lb">既存事業＋賃貸</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">売買</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">注文住宅</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">保険</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">リフォーム</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">その他</div><div class="in"></div><div class="u">円</div></div>
+    <div class="row"><span class="lb">既存事業＋賃貸</span><input class="in" data-k="s10.chintai" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">売買</span><input class="in" data-k="s10.baibai" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">注文住宅</span><input class="in" data-k="s10.chumon" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">保険</span><input class="in" data-k="s10.hoken" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">リフォーム</span><input class="in" data-k="s10.reform" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">その他</span><input class="in" data-k="s10.other" inputmode="numeric"><span class="u">円</span></div>
   </div>
   <div class="form" style="border-color:var(--blue-2);border-width:2px">
     <p class="cap">LMP導入後　年間想定</p>
-    <div class="row"><div class="lb">売上</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">粗利益</div><div class="in"></div><div class="u">円</div></div>
-    <div class="row"><div class="lb">投資回収想定</div><div class="in"></div><div class="u">か月</div></div>
+    <div class="row"><span class="lb">売上</span><input class="in" data-k="s10.sales" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">粗利益</span><input class="in" data-k="s10.gross" inputmode="numeric"><span class="u">円</span></div>
+    <div class="row"><span class="lb">投資回収想定</span><input class="in" data-k="s10.payback" inputmode="numeric"><span class="u">か月</span></div>
   </div>
 </section>
 
@@ -574,15 +664,15 @@ p{margin:0}
   <h1>LMP本部から見た御社の可能性</h1>
   <div class="grp">
     <p class="glabel">御社の最大の強み</p>
-    <div class="wbox"></div>
+    <textarea class="wbox" data-k="s11.strength"></textarea>
   </div>
   <div class="grp">
     <p class="glabel">最初に解決すべき課題</p>
-    <div class="wbox"></div>
+    <textarea class="wbox" data-k="s11.issue"></textarea>
   </div>
   <div class="grp">
     <p class="glabel">最初にやるべきこと</p>
-    <div class="wbox"></div>
+    <textarea class="wbox" data-k="s11.first"></textarea>
   </div>
 </section>
 
@@ -592,7 +682,7 @@ p{margin:0}
   <div class="grp">
     <p class="say">Lステップで、御社はこう回答しました。</p>
     <p class="glabel">「5年後、地域からこう言われたい。」</p>
-    <div class="wbox s"></div>
+    <textarea class="wbox s" data-k="s12.words"></textarea>
     <div class="hit"><span>私たちは、LMPに加盟すること自体を</span><span>ゴールにはしていません。</span></div>
     <table class="tbl">
       <tr><td class="k">社員が</td><td>「この会社で働けてよかった。」</td></tr>
@@ -611,13 +701,32 @@ p{margin:0}
   <h1>総合診断</h1>
   <div class="grp">
     <p class="glabel">LMP適性</p>
-    <div class="sel"><span>S</span><span>A</span><span>B</span><span>C</span></div>
+    <div class="pickset grade" data-k="total.grade">
+      <button type="button" data-v="S">S</button><button type="button" data-v="A">A</button>
+      <button type="button" data-v="B">B</button><button type="button" data-v="C">C</button>
+    </div>
     <p class="glabel" style="margin-top:22px">推奨</p>
-    <div class="checks">
-      <span>LMP加盟を推奨</span><span>条件整備後に推奨</span><span>継続検討</span><span>現時点では非推奨</span>
+    <div class="pickset check" data-k="total.reco">
+      <button type="button" data-v="LMP加盟を推奨">LMP加盟を推奨</button>
+      <button type="button" data-v="条件整備後に推奨">条件整備後に推奨</button>
+      <button type="button" data-v="継続検討">継続検討</button>
+      <button type="button" data-v="現時点では非推奨">現時点では非推奨</button>
     </div>
     <p class="glabel" style="margin-top:22px">NEXT ACTION</p>
-    <div class="wbox"></div>
+    <textarea class="wbox" data-k="total.next"></textarea>
+  </div>
+
+  <div class="datapanel">
+    <p class="cap">入力データ</p>
+    <p id="datainfo">入力内容は、この端末のブラウザにだけ自動保存されます。サーバーには送信されません。<br>
+      別の端末へ移すときや本部へ渡すときは「書き出し」でファイル保存し、「読み込み」で復元します。</p>
+    <div class="btns">
+      <button type="button" id="btn-export">書き出し（JSON）</button>
+      <button type="button" id="btn-import">読み込み</button>
+      <button type="button" onclick="window.print()">印刷 / PDF</button>
+      <button type="button" class="warn" id="btn-clear">入力をクリア</button>
+    </div>
+    <input type="file" id="file-import" accept="application/json,.json" hidden>
   </div>
 
   <div class="endmark">
@@ -640,9 +749,11 @@ p{margin:0}
 </div>
 
 <button class="topbtn" id="topbtn" type="button" aria-label="先頭へ">&#9650;</button>
+<div class="saveflag" id="saveflag" role="status" aria-live="polite">保存しました</div>
 
 <script>
 (function(){
+  /* ============ 目次 ============ */
   var ITEMS = [
     {g:"序"},
     {id:"sec-0",   n:"序", t:"御社なら、どう勝つか。", e:"この診断書について"},
@@ -665,7 +776,6 @@ p{margin:0}
     {id:"sec-12",  n:"12", t:"御社が目指す未来", e:"5年後の言葉"},
     {id:"sec-total",n:"総", t:"総合診断", e:"LMP適性／NEXT ACTION"}
   ];
-
   function build(el){
     var h="";
     ITEMS.forEach(function(it){
@@ -689,6 +799,7 @@ p{margin:0}
   panel.addEventListener('click',function(e){ if(e.target.closest('a')) setToc(false); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape') setToc(false); });
 
+  /* ============ 現在地・進捗 ============ */
   var secs=ITEMS.filter(function(i){return i.id;})
     .map(function(i){ return {it:i, el:document.getElementById(i.id)}; })
     .filter(function(s){ return s.el; });
@@ -696,14 +807,13 @@ p{margin:0}
   var nowNo=document.getElementById('now-no'), nowTtl=document.getElementById('now-ttl');
   var prog=document.getElementById('prog'), topbtn=document.getElementById('topbtn');
   var ticking=false, cur=null;
-
   function update(){
     ticking=false;
     var y=window.scrollY||window.pageYOffset, h=document.documentElement.scrollHeight-window.innerHeight;
     prog.style.width=(h>0?Math.min(100,Math.max(0,y/h*100)):0)+'%';
     topbtn.classList.toggle('on', y>600);
     var line=y+120, active=null;
-    secs.forEach(function(s){ if(s.el.offsetTop<=line) active=s; });
+    secs.forEach(function(s){ if(s.el.getBoundingClientRect().top+y<=line) active=s; });
     if(active&&active.it.id!==cur){
       cur=active.it.id;
       nowNo.textContent=active.it.n; nowTtl.textContent=active.it.t;
@@ -721,6 +831,122 @@ p{margin:0}
   window.addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } },{passive:true});
   window.addEventListener('resize',update);
   topbtn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+
+  /* ============ 記入欄の保存・復元 ============ */
+  var KEY='lmp-shindan-v1';
+  var fields=[].slice.call(document.querySelectorAll('input.in[data-k],textarea.wbox[data-k]'));
+  var picks=[].slice.call(document.querySelectorAll('.pickset[data-k]'));
+  var flag=document.getElementById('saveflag'), flagT=null, saveT=null;
+  var info=document.getElementById('datainfo');
+
+  function store(){
+    try{ return JSON.parse(localStorage.getItem(KEY)||'{}')||{}; }catch(e){ return {}; }
+  }
+  function ready(){
+    try{ localStorage.setItem('__t','1'); localStorage.removeItem('__t'); return true; }
+    catch(e){ return false; }
+  }
+  var canSave=ready();
+  if(!canSave){
+    info.innerHTML='このブラウザでは自動保存が使えません（プライベートモードなどで保存領域が'+
+      '無効になっています）。入力はできますが、閉じると消えます。';
+  }
+
+  function collect(){
+    var d={};
+    fields.forEach(function(el){ if(el.value!=='') d[el.dataset.k]=el.value; });
+    picks.forEach(function(g){
+      var on=[].slice.call(g.querySelectorAll('[aria-pressed="true"]')).map(function(b){ return b.dataset.v; });
+      if(on.length) d[g.dataset.k]=g.classList.contains('multi')?on:on[0];
+    });
+    return d;
+  }
+  function toast(){
+    flag.classList.add('on');
+    clearTimeout(flagT);
+    flagT=setTimeout(function(){ flag.classList.remove('on'); },1400);
+  }
+  function save(){
+    if(!canSave) return;
+    try{ localStorage.setItem(KEY, JSON.stringify(collect())); toast(); }catch(e){}
+  }
+  function saveSoon(){ clearTimeout(saveT); saveT=setTimeout(save,600); }
+
+  function grow(el){
+    if(el.tagName!=='TEXTAREA') return;
+    el.style.height='auto';
+    el.style.height=Math.max(el.scrollHeight, parseFloat(getComputedStyle(el).minHeight)||0)+'px';
+  }
+  function mark(el){ el.classList.toggle('filled', el.value.trim()!==''); }
+
+  function apply(d){
+    fields.forEach(function(el){
+      el.value = (d && typeof d[el.dataset.k]==='string') ? d[el.dataset.k] : '';
+      mark(el); grow(el);
+    });
+    picks.forEach(function(g){
+      var v = d ? d[g.dataset.k] : null;
+      var list = v==null ? [] : (Array.isArray(v)?v:[v]);
+      [].slice.call(g.querySelectorAll('[data-v]')).forEach(function(b){
+        b.setAttribute('aria-pressed', list.indexOf(b.dataset.v)>=0 ? 'true':'false');
+      });
+    });
+  }
+
+  fields.forEach(function(el){
+    el.setAttribute('aria-label', el.dataset.k);
+    el.addEventListener('input',function(){ mark(el); grow(el); saveSoon(); });
+    el.addEventListener('change',save);
+  });
+  picks.forEach(function(g){
+    var multi=g.classList.contains('multi');
+    g.addEventListener('click',function(e){
+      var b=e.target.closest('[data-v]');
+      if(!b||!g.contains(b)) return;
+      var on=b.getAttribute('aria-pressed')==='true';
+      if(!multi){
+        [].slice.call(g.querySelectorAll('[data-v]')).forEach(function(x){ x.setAttribute('aria-pressed','false'); });
+      }
+      b.setAttribute('aria-pressed', on?'false':'true');
+      save();
+    });
+  });
+
+  apply(store());
+  window.addEventListener('beforeunload',function(){ clearTimeout(saveT); save(); });
+
+  /* ---- 書き出し・読み込み・クリア ---- */
+  document.getElementById('btn-export').addEventListener('click',function(){
+    var d=collect();
+    var name=(d['b.company']||'LMP経営診断書').replace(/[\\/:*?"<>|]/g,'_');
+    var blob=new Blob([JSON.stringify(d,null,2)],{type:'application/json'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download=name+'_診断書.json';
+    document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); },0);
+  });
+  var fileIn=document.getElementById('file-import');
+  document.getElementById('btn-import').addEventListener('click',function(){ fileIn.click(); });
+  fileIn.addEventListener('change',function(){
+    var f=fileIn.files&&fileIn.files[0]; if(!f) return;
+    var r=new FileReader();
+    r.onload=function(){
+      try{
+        var d=JSON.parse(r.result);
+        if(!d||typeof d!=='object') throw 0;
+        apply(d); save();
+      }catch(e){ alert('読み込めませんでした。この診断書で書き出したJSONファイルを選んでください。'); }
+      fileIn.value='';
+    };
+    r.readAsText(f);
+  });
+  document.getElementById('btn-clear').addEventListener('click',function(){
+    if(!confirm('入力内容をすべて消します。よろしいですか？')) return;
+    apply({});
+    try{ localStorage.removeItem(KEY); }catch(e){}
+    toast();
+  });
+
   update();
 })();
 </script>
