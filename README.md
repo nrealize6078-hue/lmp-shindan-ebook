@@ -8,7 +8,7 @@ LIFE MAKE PARTNERS の個別事業診断フォーマット（全12項目＋総�
 | ファイル | 内容 |
 |---|---|
 | `index.html` | 電子書籍。単一ファイル完結。GitHub Pages にそのまま置ける |
-| `LMP_SHINDAN_A4.pdf` | A4縦 10ページ版（印刷して手書き記入できる版面） |
+| `LMP_SHINDAN_A4.pdf` | A4縦 11ページ版（印刷して手書き記入できる版面） |
 | `cover.png` / `back.png` | 表紙・裏表紙（A4版PDFの1ページ目・10ページ目から生成） |
 | `logo.png` / `logo-white.png` | LMPロゴ。原色版（透過）と白抜き版 |
 
@@ -37,9 +37,13 @@ A4版PDFの版面は `~/lmp-journey-pdf/shindan.html`。Chrome の `--print-to-p
 刷り直したら、表紙画像も作り直す。
 
 ```bash
-pdftoppm -f 1 -l 1 -r 180 -png -singlefile "LMP_SHINDAN_A4.pdf" cover
-pdftoppm -f 10 -l 10 -r 120 -png -singlefile "LMP_SHINDAN_A4.pdf" back
+LAST=$(pdfinfo LMP_SHINDAN_A4.pdf | awk '/^Pages/{print $2}')
+pdftoppm -f 1 -l 1 -r 180 -png -singlefile LMP_SHINDAN_A4.pdf cover
+pdftoppm -f "$LAST" -l "$LAST" -r 120 -png -singlefile LMP_SHINDAN_A4.pdf back
 ```
+
+裏表紙は最終ページなので、ページ番号を直接書かず `pdfinfo` から取る。
+本文の文字サイズを変えるとページ数が動く（10.5pt化で10→11ページになった）。
 
 ## 構成
 
