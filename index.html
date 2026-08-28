@@ -138,8 +138,8 @@ textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
   border:1px solid #bcd6e6;padding:.42em 1.1em;font-size:.85rem;line-height:1.6;
   -webkit-tap-highlight-color:transparent;transition:.13s}
 .pickset button:hover{border-color:var(--blue)}
-.pickset button[aria-pressed="true"]{background:var(--blue-2);border-color:var(--blue-2);
-  color:#fff;font-weight:700}
+.pickset:not(.opts) button[aria-pressed="true"]{background:var(--blue-2);
+  border-color:var(--blue-2);color:#fff;font-weight:700}
 .pickset.grade button{min-width:3.4em;text-align:center;font-weight:700;letter-spacing:.08em}
 .pickset.check button{color:var(--ink);font-weight:400}
 .pickset.check button::before{content:"□";color:var(--blue);margin-right:.5em;font-weight:700}
@@ -147,17 +147,21 @@ textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
 .pickset.check button[aria-pressed="true"]::before{content:"☑";color:#fff}
 
 .opts{margin:1em 0;display:grid;gap:8px}
-.opt{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;text-align:left;
-  border:1px solid var(--line);padding:11px 13px;background:#fff;font:inherit;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:.13s}
-.opt:hover{border-color:#9dc6e3}
+.opt{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:start;
+  text-align:left;border:1px solid var(--line);padding:11px 13px;background:#fff;
+  font:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:.13s}
+.opt:hover{border-color:#9dc6e3;background:#fbfdff}
 .opt .k{width:26px;height:26px;line-height:26px;text-align:center;background:var(--blue-2);
   color:#fff;font-size:.75rem;font-weight:700}
 .opt .l{font-size:.92rem;line-height:1.7;color:var(--ink)}
 .opt .l small{display:block;color:var(--muted);font-size:.78rem;margin-top:2px}
-.opt[aria-pressed="true"]{border-color:var(--blue);background:var(--soft);
+.opt::after{content:"";align-self:center}
+.opts .opt[aria-pressed="true"]{border-color:var(--blue);background:var(--soft);
   box-shadow:inset 4px 0 0 var(--blue)}
-.opt[aria-pressed="true"] .l{font-weight:700;color:var(--blue-2)}
+.opts .opt[aria-pressed="true"] .l{font-weight:700;color:var(--blue-2)}
+.opts .opt[aria-pressed="true"] .l small{color:var(--blue-d)}
+.opts .opt[aria-pressed="true"]::after{content:"選択中";background:var(--blue-2);color:#fff;
+  font-size:.66rem;font-weight:700;letter-spacing:.14em;padding:.4em .9em;white-space:nowrap}
 
 /* ---- 表 ---- */
 .tbl{width:100%;border-collapse:collapse;margin:1em 0;font-size:.88rem}
@@ -294,9 +298,9 @@ textarea.wbox.filled{border-color:#9dc6e3;background:#fbfdff}
     background:transparent;box-shadow:none;padding:1px 2px}
   textarea.wbox{border:1px solid #c3ccd4}
   .pickset button{border-color:#9aa7b2;color:#5b6a78}
-  .pickset button[aria-pressed="true"]{background:#065f9f;border-color:#065f9f;color:#fff}
-  .opt[aria-pressed="true"]{background:#eaf6fe}
-  .cover,.hit,.partbox,.glabel,.flowbox,.opt .k,.eng .i,
+  .pickset:not(.opts) button[aria-pressed="true"]{background:#065f9f;border-color:#065f9f;color:#fff}
+  .opts .opt[aria-pressed="true"]{background:#eaf6fe;border-color:#065f9f}
+  .cover,.hit,.partbox,.glabel,.flowbox,.opt .k,.eng .i,.opts .opt[aria-pressed="true"]::after,
   .pickset button[aria-pressed="true"]{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 </style>
